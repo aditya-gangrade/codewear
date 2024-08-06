@@ -14,7 +14,10 @@ module.exports = {
       },
 colors:{
   "navbar-color":"#003243",
-}
+"add-to-cart":"#FF9F00", 
+"our-theme":"#EB417A"
+}, 
+
     },
   },
   plugins: [],
