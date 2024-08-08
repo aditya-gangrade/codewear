@@ -1,13 +1,14 @@
 "use client";
-
-import React, { useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { CiCircleMinus } from "react-icons/ci";
+import { CiCirclePlus } from "react-icons/ci";
 import { LuShoppingCart } from "react-icons/lu";
+import Image from "next/image";
 
 const CartPage = () => {
   const [quantity, setQuantity] = useState(1);
+  const router = useRouter();
 
   const handleIncrement = () => {
     setQuantity((prevQuantity) => prevQuantity + 1);
@@ -15,6 +16,10 @@ const CartPage = () => {
 
   const handleDecrement = () => {
     setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+  };
+
+  const handleCheckout = () => {
+    router.push(`/checkout?quantity=${quantity}`);
   };
 
   return (
@@ -31,9 +36,7 @@ const CartPage = () => {
         </div>
 
         <div className="p-6">
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">
-            Add to cart
-          </h2>
+          <h2 className="text-2xl font-bold text-gray-800 mb-2">Add to cart</h2>
           <p className="text-gray-600 mb-4">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum
             itaque, esse ad est amet ratione similique aliquam repellat sunt
@@ -57,12 +60,13 @@ const CartPage = () => {
               <CiCirclePlus className="text-lg" />
             </button>
           </div>
-          <Link href="/checkout">
-            <button className="bg-blue-500 text-white py-2 px-4 rounded flex items-center gap-2 transition-transform transform hover:scale-105">
-              <LuShoppingCart className="text-lg" />
-              <span>Place Order!!</span>
-            </button>
-          </Link>
+          <button
+            onClick={handleCheckout}
+            className="bg-blue-500 text-white py-2 px-4 rounded flex items-center gap-2 transition-transform transform hover:scale-105"
+          >
+            <LuShoppingCart className="text-lg" />
+            <span>Place Order!!</span>
+          </button>
         </div>
       </div>
     </div>

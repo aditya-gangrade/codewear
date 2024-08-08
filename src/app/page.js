@@ -1,7 +1,9 @@
-export default function Home() {
+const App = () => {
   return (
-   <div>
-
-   </div>
-  );
+    <div>
+     
+    </div>
+  )
 }
+
+export default App

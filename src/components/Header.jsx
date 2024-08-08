@@ -1,9 +1,18 @@
+'use client'
+import React, { useState } from 'react'
+import LoadingBar from 'react-top-loading-bar'
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
-const Header = () => {
-  return (
+
+const Header = () => { const [progress, setProgress] = useState(0)
+  return ( 
+  <div>
+ <LoadingBar
+    color='#f11946'
+    progress={progress}
+    onLoaderFinished={() => setProgress(0)}
+  />
     <div className="fixed top-0 left-0 w-full bg-navbar-color p-4 font-sans text-white z-50">
       <div className="flex justify-between items-center">
         <div>
@@ -41,6 +50,8 @@ const Header = () => {
         </div>
       </div>
     </div>
+  </div>
+ 
   );
 };
 

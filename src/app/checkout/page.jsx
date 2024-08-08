@@ -1,13 +1,30 @@
-"use client";
-import React from "react";
+'use client'
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 const CheckoutPage = () => {
+  const router = useRouter();
+  const [quantity, setQuantity] = useState(1);
+
+  useEffect(() => {
+    const query = router.query?.quantity;
+
+    if (query) {
+      const parsedQuantity = parseInt(query, 10);
+      if (!isNaN(parsedQuantity)) {
+        setQuantity(parsedQuantity);
+      }
+    }
+  }, [router.query]);
+
   return (
     <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 m-10 lg:px-8">
       <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg">
         <div className="px-4 py-6 sm:px-6">
           <h2 className="text-2xl font-bold text-gray-900">Checkout</h2>
-          <div className="image "></div>
+          <p className="text-lg font-semibold text-gray-800 mb-4">
+            Quantity: {quantity}
+          </p>
           <div className="mt-8">
             <button
               type="submit"
