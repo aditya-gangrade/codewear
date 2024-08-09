@@ -1,57 +1,76 @@
-'use client'
-import React, { useState } from 'react'
-import LoadingBar from 'react-top-loading-bar'
+"use client";
+import React, { useState } from "react";
+import LoadingBar from "react-top-loading-bar";
 import Image from "next/image";
 import Link from "next/link";
+import { CiHeart } from "react-icons/ci";
+import { FaHeart } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
+const Header = () => {
+  const [progress, setProgress] = useState(0);
+  const [heart, setHeart] = useState(true);
+  const router = useRouter();
 
-const Header = () => { const [progress, setProgress] = useState(0)
-  return ( 
-  <div>
- <LoadingBar
-    color='#f11946'
-    progress={progress}
-    onLoaderFinished={() => setProgress(0)}
-  />
-    <div className="fixed top-0 left-0 w-full bg-navbar-color p-4 font-sans text-white z-50">
-      <div className="flex justify-between items-center">
-        <div>
-          <Link href={"/"}>
-            <Image src="/logo.png" width={160} height={140} alt="Logo" />
-          </Link>
-        </div>
-        <div>
-          <ul className="flex space-x-3 p-2">
-            <li>
-              <Link className="" href="/tshirt">
-                Tshirts
-              </Link>
-            </li>
-            <li>
-              <Link href="/mug">Mugs</Link>
-            </li>
-            <li>
-              <Link href="/sticker">Stickers</Link>
-            </li>
-            <li>
-              <Link href="/hoodie">Hoodies</Link>
-            </li>
-          </ul>
-        </div>
-        <div className="space-x-3 m-2">
-          <Link href={"/login"}>
-            {" "}
-            <button>Login</button>
-          </Link>
-          <Link href={"/signup"}>
-            {" "}
-            <button>Signup</button>
-          </Link>
+  const handleHeartClick = (e) => {
+    e.preventDefault(); // Prevent default link behavior
+    setHeart(!heart);
+    router.push("/favorite"); // Programmatically navigate
+  };
+
+  return (
+    <div>
+      <LoadingBar
+        color="#f11946"
+        progress={progress}
+        onLoaderFinished={() => setProgress(0)}
+      />
+      <div className="fixed top-0 left-0 w-full bg-navbar-color p-4 font-sans text-white z-50">
+        <div className="flex justify-between items-center">
+          <div>
+            <Link href={"/"}>
+              <Image src="/logo.png" width={160} height={140} alt="Logo" />
+            </Link>
+          </div>
+          <div>
+            <ul className="flex space-x-3 p-2">
+              <li>
+                <Link href="/tshirt">Tshirts</Link>
+              </li>
+              <li>
+                <Link href="/mug">Mugs</Link>
+              </li>
+              <li>
+                <Link href="/sticker">Stickers</Link>
+              </li>
+              <li>
+                <Link href="/hoodie">Hoodies</Link>
+              </li>
+            </ul>
+          </div>
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={handleHeartClick}
+              className="flex items-center bg-transparent border-none"
+            >
+              {heart ? (
+                <CiHeart className="text-red-500" />
+              ) : (
+                <FaHeart className="text-gray-500" />
+              )}
+            </button>
+
+            <Link href="/login">
+              <button className="px-4 py-2">Login</button>
+            </Link>
+
+            <Link href="/signup">
+              <button className="px-4 py-2">Signup</button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
-  </div>
- 
   );
 };
 

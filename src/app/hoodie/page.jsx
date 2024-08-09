@@ -1,3 +1,4 @@
+// src/app/hoodie/page.jsx
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
@@ -6,10 +7,15 @@ import { CiHeart } from "react-icons/ci";
 import { FaHeart } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import LoadingBar from "react-top-loading-bar";
+
 const HoodiePage = () => {
-  const [progress, setProgress] = useState(0);
-  const [isFavorite, setIsFavorite] = useState(false); // Assuming initially it's not favorite
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [product] = useState({
+    imageUrl: "/hoodie.jpg",
+    category: "CATEGORY",
+    title: "The Catalyzer",
+    price: 16.00
+  });
 
   const toggleFavorite = async () => {
     try {
@@ -18,7 +24,7 @@ const HoodiePage = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ productId: "the-product-id" }),
+        body: JSON.stringify(product), // Send product details
       });
 
       const result = await response.json();
@@ -42,55 +48,52 @@ const HoodiePage = () => {
 
   return (
     <div>
-     
-      <div>
-        <section className="text-gray-600 body-font">
-          <div className="container px-5 py-24 mx-auto">
-            <div className="flex flex-wrap -m-4">
-              <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-                <div className="block relative h-60 rounded overflow-hidden cursor-pointer">
-                  <img
-                    alt="ecommerce"
-                    className="object-cover object-center w-full h-full block"
-                    src="/hoodie.jpg"
-                  />
-                </div>
-                <div className="mt-4">
-                  <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
-                    CATEGORY
-                  </h3>
-                  <h2 className="text-gray-900 title-font text-lg font-medium">
-                    The Catalyzer
-                  </h2>
-                  <p className="mt-1">$16.00</p>
-                </div>
-                <div className="flex justify-center space-x-4 mt-4">
-                  <Link href="/cart">
-                    <button className="bg-our-theme text-white py-2 px-5 rounded flex items-center gap-2 transition-colors hover:bg-our-theme-dark">
-                      <LuShoppingCart className="text-lg" />
-                      <span>Add to Cart</span>
-                    </button>
-                  </Link>
-                  <button
-                    onClick={toggleFavorite}
-                    aria-label={
-                      isFavorite ? "Remove from Favorites" : "Add to Favorites"
-                    }
-                    className="flex items-center justify-center p-2 rounded transition-colors hover:bg-gray-200"
-                  >
-                    {isFavorite ? (
-                      <FaHeart className="text-red-500 text-lg" />
-                    ) : (
-                      <CiHeart className="text-gray-500 text-lg" />
-                    )}
+      <section className="text-gray-600 body-font">
+        <div className="container px-5 py-24 mx-auto">
+          <div className="flex flex-wrap -m-4">
+            <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
+              <div className="block relative h-60 rounded overflow-hidden cursor-pointer">
+                <img
+                  alt="ecommerce"
+                  className="object-cover object-center w-full h-full block"
+                  src={product.imageUrl}
+                />
+              </div>
+              <div className="mt-4">
+                <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
+                  {product.category}
+                </h3>
+                <h2 className="text-gray-900 title-font text-lg font-medium">
+                  {product.title}
+                </h2>
+                <p className="mt-1">${product.price.toFixed(2)}</p>
+              </div>
+              <div className="flex justify-center space-x-4 mt-4">
+                <Link href="/cart">
+                  <button className="bg-our-theme text-white py-2 px-5 rounded flex items-center gap-2 transition-colors hover:bg-our-theme-dark">
+                    <LuShoppingCart className="text-lg" />
+                    <span>Add to Cart</span>
                   </button>
-                </div>
+                </Link>
+                <button
+                  onClick={toggleFavorite}
+                  aria-label={
+                    isFavorite ? "Remove from Favorites" : "Add to Favorites"
+                  }
+                  className="flex items-center justify-center p-2 rounded transition-colors hover:bg-gray-200"
+                >
+                  {isFavorite ? (
+                    <FaHeart className="text-red-500 text-lg" />
+                  ) : (
+                    <CiHeart className="text-gray-500 text-lg" />
+                  )}
+                </button>
               </div>
             </div>
           </div>
-        </section>
-        <ToastContainer />
-      </div>
+        </div>
+      </section>
+      <ToastContainer />
     </div>
   );
 };

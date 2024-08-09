@@ -1,21 +1,23 @@
-'use client'
-import { useRouter } from 'next/navigation';
+"use client"; // Ensure this is present if using client-side hooks
+
+import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const CheckoutPage = () => {
-  const router = useRouter();
+  const searchParams = useSearchParams();
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
-    const query = router.query?.quantity;
+    const quantityParam = searchParams.get('quantity');
 
-    if (query) {
-      const parsedQuantity = parseInt(query, 10);
+    if (quantityParam) {
+      const parsedQuantity = parseInt(quantityParam, 10);
       if (!isNaN(parsedQuantity)) {
         setQuantity(parsedQuantity);
       }
     }
-  }, [router.query]);
+  }, [searchParams]);
+
   return (
     <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 m-10 lg:px-8">
       <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg">
@@ -24,6 +26,7 @@ const CheckoutPage = () => {
           <p className="text-lg font-semibold text-gray-800 mb-4">
             Quantity: {quantity}
           </p>
+          <p>Toatal Payment:{120*quantity} </p>
           <div className="mt-8">
             <button
               type="submit"
