@@ -6,7 +6,6 @@ import Link from "next/link";
 import { CiHeart } from "react-icons/ci";
 import { FaHeart } from "react-icons/fa";
 import { useRouter } from "next/navigation";
-
 const Header = () => {
   const [progress, setProgress] = useState(0);
   const [heart, setHeart] = useState(true);
@@ -34,6 +33,10 @@ const Header = () => {
           </div>
           <div>
             <ul className="flex space-x-3 p-2">
+              {" "}
+              <li>
+                <Link href="/hoodie">Hoodies</Link>
+              </li>
               <li>
                 <Link href="/tshirt">Tshirts</Link>
               </li>
@@ -42,9 +45,6 @@ const Header = () => {
               </li>
               <li>
                 <Link href="/sticker">Stickers</Link>
-              </li>
-              <li>
-                <Link href="/hoodie">Hoodies</Link>
               </li>
             </ul>
           </div>
