@@ -6,6 +6,7 @@ import Link from "next/link";
 import { CiHeart } from "react-icons/ci";
 import { FaHeart } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import ThemeToggler from "./ThemeToggler";
 const Header = () => {
   const [progress, setProgress] = useState(0);
   const [heart, setHeart] = useState(true);
@@ -27,13 +28,12 @@ const Header = () => {
       <div className="fixed top-0 left-0 w-full bg-navbar-color p-4 font-sans text-white z-50">
         <div className="flex justify-between items-center">
           <div>
-            <Link href={"/"}>
+            <Link href="/">
               <Image src="/logo.png" width={160} height={140} alt="Logo" />
             </Link>
           </div>
           <div>
             <ul className="flex space-x-3 p-2">
-              {" "}
               <li>
                 <Link href="/hoodie">Hoodies</Link>
               </li>
@@ -47,16 +47,18 @@ const Header = () => {
                 <Link href="/sticker">Stickers</Link>
               </li>
             </ul>
-          </div>
+          </div>   <div className="max-mobile:hidden">
+              <ThemeToggler />
+            </div>
           <div className="flex items-center space-x-4">
             <button
               onClick={handleHeartClick}
               className="flex items-center bg-transparent border-none"
             >
               {heart ? (
-                <CiHeart className="text-red-500" />
+                <CiHeart className="text-red-500 text-xl" />
               ) : (
-                <FaHeart className="text-gray-500" />
+                <FaHeart className="text-gray-500 text-xl" />
               )}
             </button>
 
