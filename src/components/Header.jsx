@@ -6,7 +6,6 @@ import Link from "next/link";
 import { CiHeart } from "react-icons/ci";
 import { FaHeart } from "react-icons/fa";
 import { useRouter } from "next/navigation";
-import ThemeToggler from "./ThemeToggler";
 const Header = () => {
   const [progress, setProgress] = useState(0);
   const [heart, setHeart] = useState(true);
@@ -17,7 +16,6 @@ const Header = () => {
     setHeart(!heart);
     router.push("/favorite"); // Programmatically navigate
   };
-
   return (
     <div>
       <LoadingBar
@@ -47,9 +45,7 @@ const Header = () => {
                 <Link href="/sticker">Stickers</Link>
               </li>
             </ul>
-          </div>   <div className="max-mobile:hidden">
-              <ThemeToggler />
-            </div>
+          </div>{" "}
           <div className="flex items-center space-x-4">
             <button
               onClick={handleHeartClick}
