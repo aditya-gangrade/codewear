@@ -6,6 +6,7 @@ import Link from "next/link";
 import { CiHeart } from "react-icons/ci";
 import { FaHeart } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+
 const Header = () => {
   const [progress, setProgress] = useState(0);
   const [heart, setHeart] = useState(true);
@@ -16,6 +17,7 @@ const Header = () => {
     setHeart(!heart);
     router.push("/favorite"); // Programmatically navigate
   };
+
   return (
     <div>
       <LoadingBar
@@ -25,12 +27,21 @@ const Header = () => {
       />
       <div className="fixed top-0 left-0 w-full bg-navbar-color p-4 font-sans text-white z-50">
         <div className="flex justify-between items-center">
-          <div>
+          {/* Logo */}
+          <div className="flex-shrink-0">
             <Link href="/">
-              <Image src="/logo.png" width={160} height={140} alt="Logo" />
+              <Image
+                src="/logo.png"
+                width={160}
+                height={140}
+                alt="Logo"
+                className="w-32 h-auto sm:w-40"
+              />
             </Link>
           </div>
-          <div>
+
+          {/* Navigation Links */}
+          <div className="hidden md:block">
             <ul className="flex space-x-3 p-2">
               <li>
                 <Link href="/hoodie">Hoodies</Link>
@@ -45,7 +56,9 @@ const Header = () => {
                 <Link href="/sticker">Stickers</Link>
               </li>
             </ul>
-          </div>{" "}
+          </div>
+
+          {/* Icons and Buttons */}
           <div className="flex items-center space-x-4">
             <button
               onClick={handleHeartClick}
@@ -59,13 +72,31 @@ const Header = () => {
             </button>
 
             <Link href="/login">
-              <button className="px-4 py-2">Login</button>
+              <button className="px-4 py-2 hidden md:block">Login</button>
             </Link>
 
             <Link href="/signup">
-              <button className="px-4 py-2">Signup</button>
+              <button className="px-4 py-2 hidden md:block">Signup</button>
             </Link>
           </div>
+        </div>
+
+        {/* Mobile Navigation Links */}
+        <div className="block md:hidden mt-4">
+          <ul className="flex flex-col space-y-2 p-2">
+            <li>
+              <Link href="/hoodie">Hoodies</Link>
+            </li>
+            <li>
+              <Link href="/tshirt">Tshirts</Link>
+            </li>
+            <li>
+              <Link href="/sticker">Stickers</Link>
+            </li>{" "}
+            <li>
+              <Link href="/mug">Mugs</Link>
+            </li>
+          </ul>
         </div>
       </div>
     </div>

@@ -14,7 +14,7 @@ const UserSchema = new mongoose.Schema({
         require:[true, "Password is required"]
     },
     isVerified:{
-        type : Boolean,
+        type : Boolean, //mongo data base db -> models -> documents(Schema) 
         default : false
     },
     verifyToken:{
